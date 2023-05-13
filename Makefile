@@ -15,12 +15,19 @@ down:
 	# usage: make down
 	docker-compose down
 
+exec:
+	# コンテナ(仮想環境)にリモートアクセスする
+	# usage: make exec
+	docker exec -it clasp-app /bin/bash
+
 ### clasp
 
-login:
-	# Google にログインして、ローカルから GAS への接続情報を取得する
-	# usage: make login
-	docker exec -it clasp-app sh /clasp-login.sh
+#login:
+#	# Google にログインして、ローカルから GAS への接続情報を取得する
+#	# usage: make login
+#	docker exec -it clasp-app sh /clasp-login.sh
+
+# NOTE: コンテナにリモートアクセスして、コンテナ内で /clasp-login.sh を実行する
 
 clone:
 	# ローカルから GAS のプロジェクトを指定して、GAS のコードをダウンロードする
