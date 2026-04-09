@@ -1,6 +1,3 @@
-FROM node:latest
+FROM node:22-slim
 WORKDIR /work
-RUN cd /work && \
-  npm init -y && \
-  npm i -g @google/clasp && \
-  npm i -g @types/google-apps-script
+RUN npm install -g @google/clasp

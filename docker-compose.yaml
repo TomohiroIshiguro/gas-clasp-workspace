@@ -1,4 +1,3 @@
-version: '3'
 services:
   clasp-app:
     container_name: clasp-app

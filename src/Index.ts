@@ -16,10 +16,9 @@ function doPost(e: any) {
 }
 
 // DEBUG ログを Spreadsheet に出力する関数
-const ss = SpreadsheetApp.openById(spreadsheetId);
-const sheet = ss.getSheetByName(ssSheetName);
-
 function log(message: string) {
+  const ss = SpreadsheetApp.openById(spreadsheetId);
+  const sheet = ss.getSheetByName(ssSheetName);
   const lastRow = sheet.getLastRow();
   sheet.getRange(lastRow + 1, 1).setValue(message);
 }

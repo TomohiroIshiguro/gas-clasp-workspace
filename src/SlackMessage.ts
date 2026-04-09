@@ -6,14 +6,13 @@ function replySlackMessage(data: any) {
     return;
   }
 
-  const token: string = data.token;
   const channel: string = data.event.channel;
   const text: string = data.event.text;
 
   // スレッドが存在しない場合はtimestamp(ts)を利用してsendSlackで新規作成
   const threadTs: string = data.event.thread_ts || data.event.ts;
 
-  sendSlack(token, channel, threadTs, text);
+  sendSlack(channel, threadTs, text);
 
   console.log(JSON.stringify(data, null, 2));
 }
@@ -31,15 +30,14 @@ type Headers = {
 type ApiParams = {
   method: string;
   headers: Headers;
-  payload: SlackMessage;
+  payload: string;
 };
 
 function sendSlack(
-  token: string,
   channel: string,
-  threadTs: string
+  threadTs: string,
   message: string,
-) {
+): boolean {
   const url: string = slackApiBaseURL + "chat.postMessage";
   const payload: SlackMessage = {
     channel: channel,
@@ -47,15 +45,15 @@ function sendSlack(
     text: message,
   };
   const apiHeaders: Headers = {
-    Authorization: "Bearer " + slackToken;
+    Authorization: "Bearer " + slackToken,
   };
   const params: ApiParams = {
     method: "POST",
     headers: apiHeaders,
-    payload: payload,
+    payload: JSON.stringify(payload),
   };
 
   log(JSON.stringify(params, null, 2));
   const response = UrlFetchApp.fetch(url, params);
-  return response.ok;
+  return response.getResponseCode() === 200;
 }

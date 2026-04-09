@@ -8,12 +8,12 @@ help:
 up:
 	# コンテナ(仮想環境)を起動する
 	# usage: make up
-	docker-compose up -d
+	docker compose up -d
 
 down:
 	# コンテナ(仮想環境)を破棄する
 	# usage: make down
-	docker-compose down
+	docker compose down
 
 exec:
 	# コンテナ(仮想環境)にリモートアクセスする
@@ -22,12 +22,11 @@ exec:
 
 ### clasp
 
-#login:
-#	# Google にログインして、ローカルから GAS への接続情報を取得する
-#	# usage: make login
-#	docker exec -it clasp-app sh /clasp-login.sh
-
-# NOTE: コンテナにリモートアクセスして、コンテナ内で /clasp-login.sh を実行する
+login:
+	# Google にログインして、ローカルから GAS への接続情報を取得する
+	# usage: make login
+	# NOTE: コンテナにリモートアクセスして、コンテナ内で /clasp-login.sh を実行する
+	docker exec -it clasp-app sh /clasp-login.sh
 
 clone:
 	# ローカルから GAS のプロジェクトを指定して、GAS のコードをダウンロードする
@@ -45,7 +44,7 @@ pull:
 	docker exec -it clasp-app clasp pull
 
 clean:
-	# コードを削除する
+	# src ディレクトリ内のコードを削除する (設定ファイルを除く)
 	# usage: make clean
 	rm -Rf src
 	mkdir src
