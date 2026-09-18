@@ -22,12 +22,10 @@ exec:
 
 ### clasp
 
-#login:
-#	# Google にログインして、ローカルから GAS への接続情報を取得する
-#	# usage: make login
-#	docker exec -it clasp-app sh /clasp-login.sh
-
-# NOTE: コンテナにリモートアクセスして、コンテナ内で /clasp-login.sh を実行する
+login:
+	# Google にログインして、ローカルから GAS への接続情報を取得する
+	# usage: make login
+	docker exec -it clasp-app clasp login --redirect-port 37473
 
 clone:
 	# ローカルから GAS のプロジェクトを指定して、GAS のコードをダウンロードする

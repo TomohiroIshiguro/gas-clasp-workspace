@@ -7,6 +7,13 @@ services:
     tty: true
     environment:
       - TZ=Asia/Tokyo
+    ports:
+      - "37473:37473"
     volumes:
       - ./src:/work
+      - clasp-home:/root
       - ./app/clasp-login.sh:/clasp-login.sh:ro
+
+volumes:
+  clasp-home:
+
